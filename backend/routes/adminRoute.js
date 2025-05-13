@@ -12,5 +12,4 @@ router.get('/history', auth, getClaimHistory);
 router.post('/login',login);
 
 
-
 module.exports = router;

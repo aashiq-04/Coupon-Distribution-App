@@ -46,7 +46,7 @@ const claimCoupon = async (req, res) => {
     const availableCoupons = await Coupon.find({isClaimed:false});
     if (availableCoupons.length===0)
     {
-      return res.status(400).json({message:"No Coupon Availale"});
+      return res.status(400).json({message:"No Coupon Availale Right Now"});
     }
     const nextCoupon = availableCoupons[roundRobinIndex%availableCoupons.length];
     nextCoupon.isClaimed = true;
@@ -62,6 +62,7 @@ const claimCoupon = async (req, res) => {
       sameSite:'lax'
     });
     console.log(`Coupon ${nextCoupon.code} claimed by ${ip}`);
+    console.log("Coupon Claimed");
     res.json({message:`Coupon ${nextCoupon.code} claimed successfully`});
   }catch(err)
   {
