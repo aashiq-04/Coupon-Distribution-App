@@ -41,6 +41,15 @@ nav a:hover {
   color: #ffdd57;
 }
 
+
+.cont{
+  border: 3px solid #333 ;
+  /* width: 100%; */
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
 /* Header Section Styling */
 .App-header {
   background: rgba(0, 0, 0, 0.4);
