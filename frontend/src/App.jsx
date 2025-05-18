@@ -8,8 +8,9 @@ import { useState, useEffect } from "react";
 import "./App.css";
 
 import Home from "./pages/Home";
+import Nav from "./components/Nav";
 import ClaimCoupon from "./components/CouponComponents/ClaimCoupon";
-
+import AdminDashboard from "./components/AdminComponents/AdminDashboard";
 import AdminLogin from "./components/AdminComponents/AdminLogin";
 import ClaimHistory from "./components/AdminComponents/ClaimHistory";
 import AddCoupon from "./components/AdminComponents/AddCoupon";
@@ -45,43 +46,34 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <Nav isAdmin={isAdmin} onLogout={handleLogout} />
         <Routes>
-          {/* New Home Page */}
           <Route path="/" element={<Home />} />
-
-          {/* Guest Route */}
           <Route path="/claim" element={<ClaimCoupon />} />
-
-          {/* Admin Login */}
-          <Route
-            path="/admin/login"
-            element={<AdminLogin onLogin={handleLogin} />}
+          <Route path="/admin/login" element={<AdminLogin onLogin={handleLogin} />} />
+          <Route 
+            path="/admin/dashboard" 
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            } 
           />
-
-          {/* Admin Routes */}
-          <Route
-            path="/admin/history"
+          <Route 
+            path="/admin/history" 
             element={
               <ProtectedRoute>
                 <ClaimHistory />
               </ProtectedRoute>
-            }
+            } 
           />
-
-          <Route
-            path="/admin/add"
+          <Route 
+            path="/admin/add" 
             element={
               <ProtectedRoute>
                 <AddCoupon />
               </ProtectedRoute>
-            }
-          />
-
-          {/* Optionally add a logout route */}
-          <Route
-            path="/admin/logout"
-            element={<Navigate to="/" />}
-            onEnter={handleLogout}
+            } 
           />
         </Routes>
       </Router>

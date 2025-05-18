@@ -1,18 +1,24 @@
 import { useNavigate } from 'react-router-dom';
+import '../App.css';  // Import the CSS file
 
 function Home() {
   const navigate = useNavigate();
 
   return (
-    <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h1>🎉 Welcome to the Coupon Distribution App</h1>
+    <div className="home-container">
+      
+      <h1> Welcome to the Coupon Distribution App</h1>
       <p>Choose your action below:</p>
 
-      <button onClick={() => navigate('/claim')} style={{ margin: '1rem' }}>
+      <button 
+        onClick={() => navigate('/claim')} 
+        className="home-button">
         Claim Coupon as Guest
       </button>
 
-      <button onClick={() => navigate('/admin/login')} style={{ margin: '1rem' }}>
+      <button 
+        onClick={() => navigate('/admin/login')} 
+        className="home-button">
         Admin Login
       </button>
     </div>

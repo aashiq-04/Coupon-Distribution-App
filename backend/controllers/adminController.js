@@ -84,4 +84,28 @@ const getClaimHistory = async (req, res) => {
 };
 
 
-module.exports = { login, getAdminData, addCoupon, delCoupon, toggleCoupon, getClaimHistory };
+const getDashboardStats = async (req,res)=>{
+  try{
+    const totalCoupons = await Coupon.countDocuments();
+    const claimedCoupons = await Coupon.countDocuments({isClaimed:true});
+
+    res.json({
+      totalCoupons,
+      claimedCoupons
+    });
+  }catch(err){
+    res.status(500).json({message:'Internal Server Error'});
+  }
+};
+
+
+module.exports = 
+{
+  login, 
+  getAdminData, 
+  addCoupon, 
+  delCoupon, 
+  toggleCoupon, 
+  getClaimHistory,
+  getDashboardStats
+};
