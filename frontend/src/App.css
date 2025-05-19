@@ -1,39 +1,53 @@
+/* Main Application Styles */
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  font-family: Arial, sans-serif;
+}
+
 .App {
-  text-align: center;
   background: linear-gradient(135deg, #007bff 0%, #00d4ff 100%);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  color: white;
+  justify-content: flex-start;
+}
+.box{
+  margin-top: 50px;
 }
 
-/* Spinning Logo Animation */
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.home-container{
+  text-align: center;
+}
+.login,form{
+  display: flex;
+  flex-direction: row;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-/* Navigation Styles */
+/* Navbar Styles */
 nav {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  /* justify-content: space-between; */
+  align-items: end;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 nav a {
-  text-decoration: none;
   color: #ffffff;
+  text-decoration: none;
   font-weight: bold;
+  font-size: 1rem;
+  margin: 0 1rem;
   transition: color 0.3s;
 }
 
@@ -41,31 +55,35 @@ nav a:hover {
   color: #ffdd57;
 }
 
-
-.cont{
-  border: 3px solid #333 ;
-  /* width: 100%; */
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-}
-
-/* Header Section Styling */
+/* Main Content Styles */
 .App-header {
-  background: rgba(0, 0, 0, 0.4);
+  margin-top: 6rem; /* Space for navbar */
   padding: 2rem;
+  max-width: 800px;
+  background: rgba(0, 0, 0, 0.4);
   border-radius: 15px;
   backdrop-filter: blur(10px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
 }
 
-/* Button Styling */
+.App-header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.App-header p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Button Styles */
 button {
   background-color: #ffdd57;
   color: #333;
   border: none;
   padding: 0.75rem 1.5rem;
-  margin: 1rem;
+  margin: 0.5rem;
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
@@ -75,13 +93,76 @@ button {
 button:hover {
   background-color: #ffc107;
 }
+/* AdminLogin.css */
 
-/* Animation for Logo */
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.admin-login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #007bff, #00d4ff);
+}
+
+.login-card {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-card input {
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+  transition: border 0.3s;
+}
+
+.login-card input:focus {
+  border-color: #007bff;
+}
+
+.login-card button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.login-card button:disabled {
+  background-color: #b3d7ff;
+  cursor: not-allowed;
+}
+
+.login-card button:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.error-msg {
+  color: #ff4d4d;
+  font-size: 0.9rem;
+}
+
+.success-msg {
+  color: #4caf50;
+  font-size: 0.9rem;
 }

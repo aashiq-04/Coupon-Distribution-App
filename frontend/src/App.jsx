@@ -45,6 +45,7 @@ function App() {
 
   return (
     <div className="App">
+      <div className="box">
       <Router>
         <Nav isAdmin={isAdmin} onLogout={handleLogout} />
         <Routes>
@@ -77,6 +78,7 @@ function App() {
           />
         </Routes>
       </Router>
+      </div>
     </div>
   );
 }
