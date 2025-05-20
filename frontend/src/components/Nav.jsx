@@ -30,6 +30,8 @@ const Nav = ({ isAdmin, onLogout }) => {
         <div className="cont">
           <Link to="/" className="nav-link">Home</Link>
           <Link to="/admin/history" className="nav-link">Claim History</Link>
+          <Link to="/admin/allcoupons" className="nav-link">All Coupons</Link>
+          <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
         </div>
       );
     }

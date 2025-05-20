@@ -13,6 +13,7 @@ import ClaimCoupon from "./components/CouponComponents/ClaimCoupon";
 import AdminDashboard from "./components/AdminComponents/AdminDashboard";
 import AdminLogin from "./components/AdminComponents/AdminLogin";
 import ClaimHistory from "./components/AdminComponents/ClaimHistory";
+import AllCoupons from "./components/AdminComponents/AllCoupons";
 import AddCoupon from "./components/AdminComponents/AddCoupon";
 
 function App() {
@@ -67,6 +68,14 @@ function App() {
                 <ClaimHistory />
               </ProtectedRoute>
             } 
+          />
+          <Route 
+          path="/admin/allcoupons"
+          element={
+            <ProtectedRoute>
+              <AllCoupons/>
+            </ProtectedRoute>
+          }
           />
           <Route 
             path="/admin/add" 

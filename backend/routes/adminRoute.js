@@ -6,8 +6,9 @@
         addCoupon,
         delCoupon,
         getClaimHistory,
-        toggleCoupon,
-        getDashboardStats
+        getDashboardStats,
+        logout,
+        allCoupon
     } = require('../controllers/adminController');
     const auth = require('../middleware/auth');
 
@@ -16,10 +17,11 @@
     router.get('/data', auth, getAdminData);
     router.post('/coupon', auth, addCoupon);
     router.post('/delete/:code',auth, delCoupon);
-    router.patch('/coupon/:code/toggle', auth, toggleCoupon);
+    router.get('/allcoupons', auth, allCoupon);
     router.get('/history', auth, getClaimHistory);
     router.post('/login',login);
     router.get('/dashboard',auth,getDashboardStats);
+    router.post('/logout',logout);
 
 
 

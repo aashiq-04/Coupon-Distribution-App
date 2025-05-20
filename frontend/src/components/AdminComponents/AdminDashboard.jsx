@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const AdminDashboard = () => {
+const AdminDashboard = (onLogout) => {
   const [totalCoupons, setTotalCoupons] = useState(0);
   const [claimedCoupons, setClaimedCoupons] = useState(0);
   const [newCoupon, setNewCoupon] = useState("");
@@ -42,9 +42,14 @@ const AdminDashboard = () => {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem("isAdmin");
-    navigate("/admin/login");
+  const logout = async () => {
+    try {
+      await axios.post("http://localhost:5000/admin/logout", {}, { withCredentials: true });
+      // onLogout();
+      navigate("/admin/login");
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
   };
 
   return (
@@ -63,7 +68,7 @@ const AdminDashboard = () => {
         />
         <button type="submit">Add Coupon</button>
       </form>
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={logout}>Logout</button>
       {msg && <p>{msg}</p>}
     </div>
   );

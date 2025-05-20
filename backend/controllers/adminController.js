@@ -7,13 +7,18 @@ const login = (req, res) => {
   const { username, password } = req.body;
   if (username === process.env.ADMIN_USER && password === process.env.ADMIN_PASS) {
     const token = jwt.sign({ id: username }, process.env.JWT_SECRET, { expiresIn: '1h' });
-    res.cookie('token', token, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true, sameSite:'lax',secure:false,});
     console.log("Logged IN");
     return res.json({ message: 'Logged in' });
   } else {
     return res.status(401).json({ message: 'Invalid credentials' });
   }
 };
+
+const logout = (req,res)=>{
+  res.clearCookie('token');
+  res.json({message:"Logout Successfull"});
+}
 
 //GET
 const getAdminData =async (req, res) => {
@@ -56,21 +61,17 @@ const delCoupon = async (req, res) => {
 
 
 
-// ✅ Toggle Coupon Availability
-const toggleCoupon = async (req, res) => {
-  const { code } = req.params;
+const allCoupon = async (req, res) => {
   try {
-    const coupon = await Coupon.findOne({ code });
-    if (!coupon) return res.status(404).json({ message: 'Coupon not found' });
-
-    coupon.isClaimed = !coupon.isClaimed;
-    await coupon.save();
-
-    res.json({ message: 'Coupon availability updated' });
+    const coupons = await Coupon.find(); // all coupons
+    res.json(coupons);
   } catch (err) {
     res.status(500).json({ message: 'Server error' });
   }
 };
+
+
+
 
 
 //GET 
@@ -104,8 +105,9 @@ module.exports =
   login, 
   getAdminData, 
   addCoupon, 
-  delCoupon, 
-  toggleCoupon, 
+  delCoupon,  
   getClaimHistory,
-  getDashboardStats
+  getDashboardStats,
+  logout,
+  allCoupon
 };

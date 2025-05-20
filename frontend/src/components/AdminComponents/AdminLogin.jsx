@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import "./AdminLogin.css";
 
-
-const AdminLogin = ({ onLogin }) => {
+const AdminLogin = ({ onLogin}) => {
   const [username, setUser] = useState('');
   const [password, setPass] = useState('');
   const [msg, setMsg] = useState('');
@@ -17,19 +15,19 @@ const AdminLogin = ({ onLogin }) => {
     setLoading(true);
     setMsg('');
     setSuccessMsg('');
-    
+
     try {
-      await axios.post('http://localhost:5000/admin/login', 
-        { username, password }, 
+      await axios.post('http://localhost:5000/admin/login',
+        { username, password },
         { withCredentials: true }
       );
-      
+
       onLogin();
       setSuccessMsg("Login Successful! Redirecting to the dashboard...");
-      
+
       setTimeout(() => {
         navigate('/admin/dashboard');
-      }, 2000);
+      }, 1000);
     } catch (err) {
       setMsg(err.response?.data?.message || 'Login Failed');
     } finally {
@@ -37,23 +35,24 @@ const AdminLogin = ({ onLogin }) => {
     }
   };
 
+
   return (
     <div className="admin-login-container">
       <div className="login-card">
         <h2>Admin Login</h2>
         <form onSubmit={login}>
-          <input 
-            value={username} 
+          <input
+            value={username}
             onChange={e => setUser(e.target.value)}
             placeholder="Username"
-            required 
+            required
           />
-          <input 
-            type="password" 
-            value={password} 
-            onChange={e => setPass(e.target.value)} 
-            placeholder="Password" 
-            required 
+          <input
+            type="password"
+            value={password}
+            onChange={e => setPass(e.target.value)}
+            placeholder="Password"
+            required
           />
           <button type="submit" disabled={loading}>
             {loading ? "Logging in..." : "Login"}
@@ -63,7 +62,6 @@ const AdminLogin = ({ onLogin }) => {
         </form>
       </div>
     </div>
-
   );
 };
 
