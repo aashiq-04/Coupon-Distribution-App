@@ -25,6 +25,7 @@ const AdminDashboard = (onLogout) => {
       setMsg("Failed to load dashboard data");
     }
   };
+  
 
   const handleAddCoupon = async (e) => {
     e.preventDefault();
@@ -46,11 +47,34 @@ const AdminDashboard = (onLogout) => {
     try {
       await axios.post("http://localhost:5000/admin/logout", {}, { withCredentials: true });
       // onLogout();
+      localStorage.removeItem("isAdmin")
       navigate("/admin/login");
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("isAdmin");
+
+    if (!isLoggedIn) {
+      navigate("/admin/login", { replace: true });
+    }
+
+    // Prevent back navigation
+    window.history.pushState(null, "", window.location.href);
+    const handlePopState = () => {
+      window.history.pushState(null, "", window.location.href);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+  }, [navigate]);
+
+
 
   return (
     <div>
@@ -58,7 +82,7 @@ const AdminDashboard = (onLogout) => {
       <p>Total Coupons: {totalCoupons}</p>
       <p>Claimed Coupons: {claimedCoupons}</p>
       
-      <form onSubmit={handleAddCoupon}>
+      <form onSubmit={handleAddCoupon} className="coupon-form">
         <input 
           type="text" 
           placeholder="Enter Coupon Code" 

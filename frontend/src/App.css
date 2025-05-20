@@ -50,7 +50,11 @@ nav a {
   margin: 0 1rem;
   transition: color 0.3s;
 }
-
+.coupon-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 nav a:hover {
   color: #ffdd57;
 }

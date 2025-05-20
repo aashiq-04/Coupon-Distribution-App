@@ -47,7 +47,7 @@ const addCoupon = async (req, res) => {
 
 
 // POST METHOD
-const delCoupon = async (req, res) => {
+const   delCoupon = async (req, res) => {
   const { code } = req.params;
   try {
     const deleted = await Coupon.findOneAndDelete({ code });
